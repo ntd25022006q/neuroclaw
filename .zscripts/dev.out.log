@@ -1,0 +1,394 @@
+==========================================
+[2026-03-22 23:32:45] Starting: bun install
+==========================================
+[BUN] Installing dependencies...
+[0.02ms] ".env"
+bun install v1.3.10 (30e609e0)
+
++ @tailwindcss/postcss@4.1.18
++ @types/react@19.2.8
++ @types/react-dom@19.2.3
++ bun-types@1.3.6
++ eslint@9.39.2
++ eslint-config-next@16.1.3
++ tailwindcss@4.1.18
++ tw-animate-css@1.4.0
++ typescript@5.9.3
++ @dnd-kit/core@6.3.1
++ @dnd-kit/sortable@10.0.0
++ @dnd-kit/utilities@3.2.2
++ @hookform/resolvers@5.2.2
++ @mdxeditor/editor@3.52.3
++ @prisma/client@6.19.2
++ @radix-ui/react-accordion@1.2.12
++ @radix-ui/react-alert-dialog@1.1.15
++ @radix-ui/react-aspect-ratio@1.1.8
++ @radix-ui/react-avatar@1.1.11
++ @radix-ui/react-checkbox@1.3.3
++ @radix-ui/react-collapsible@1.1.12
++ @radix-ui/react-context-menu@2.2.16
++ @radix-ui/react-dialog@1.1.15
++ @radix-ui/react-dropdown-menu@2.1.16
++ @radix-ui/react-hover-card@1.1.15
++ @radix-ui/react-label@2.1.8
++ @radix-ui/react-menubar@1.1.16
++ @radix-ui/react-navigation-menu@1.2.14
++ @radix-ui/react-popover@1.1.15
++ @radix-ui/react-progress@1.1.8
++ @radix-ui/react-radio-group@1.3.8
++ @radix-ui/react-scroll-area@1.2.10
++ @radix-ui/react-select@2.2.6
++ @radix-ui/react-separator@1.1.8
++ @radix-ui/react-slider@1.3.6
++ @radix-ui/react-slot@1.2.4
++ @radix-ui/react-switch@1.2.6
++ @radix-ui/react-tabs@1.1.13
++ @radix-ui/react-toast@1.2.15
++ @radix-ui/react-toggle@1.1.10
++ @radix-ui/react-toggle-group@1.1.11
++ @radix-ui/react-tooltip@1.2.8
++ @reactuses/core@6.1.9
++ @tanstack/react-query@5.90.19
++ @tanstack/react-table@8.21.3
++ class-variance-authority@0.7.1
++ clsx@2.1.1
++ cmdk@1.1.1
++ date-fns@4.1.0
++ embla-carousel-react@8.6.0
++ framer-motion@12.26.2
++ input-otp@1.4.2
++ lucide-react@0.525.0
++ next@16.1.3
++ next-auth@4.24.13
++ next-intl@4.7.0
++ next-themes@0.4.6
++ prisma@6.19.2
++ react@19.2.3
++ react-day-picker@9.13.0
++ react-dom@19.2.3
++ react-hook-form@7.71.1
++ react-markdown@10.1.0
++ react-resizable-panels@3.0.6
++ react-syntax-highlighter@15.6.6
++ recharts@2.15.4
++ sharp@0.34.5
++ sonner@2.0.7
++ tailwind-merge@3.4.0
++ tailwindcss-animate@1.0.7
++ uuid@11.1.0
++ vaul@1.1.2
++ z-ai-web-dev-sdk@0.0.17
++ zod@4.3.5
++ zustand@5.0.10
+
+827 packages installed [4.92s]
+==========================================
+[2026-03-22 23:32:50] Completed: bun install
+[LOG] Step: bun install | Duration: 5s
+==========================================
+
+==========================================
+[2026-03-22 23:32:50] Starting: bun run db:push
+==========================================
+[BUN] Setting up database...
+$ prisma db push
+Environment variables loaded from .env
+Prisma schema loaded from prisma/schema.prisma
+Datasource "db": SQLite database "custom.db" at "file:/home/z/my-project/db/custom.db"
+
+SQLite database custom.db created at file:/home/z/my-project/db/custom.db
+
+🚀  Your database is now in sync with your Prisma schema. Done in 9ms
+
+Running generate... (Use --skip-generate to skip the generators)
+[2K[1A[2K[GRunning generate... - Prisma Client
+[2K[1A[2K[G✔ Generated Prisma Client (v6.19.2) to ./node_modules/@prisma/client in 45ms
+┌─────────────────────────────────────────────────────────┐
+│  Update available 6.19.2 -> 7.5.0                       │
+│                                                         │
+│  This is a major update - please follow the guide at    │
+│  https://pris.ly/d/major-version-upgrade                │
+│                                                         │
+│  Run the following to update                            │
+│    npm i --save-dev prisma@latest                       │
+│    npm i @prisma/client@latest                          │
+└─────────────────────────────────────────────────────────┘
+
+==========================================
+[2026-03-22 23:32:51] Completed: bun run db:push
+[LOG] Step: bun run db:push | Duration: 1s
+==========================================
+
+==========================================
+[2026-03-22 23:32:51] Starting: Starting Next.js dev server
+==========================================
+[BUN] Starting development server...
+==========================================
+$ next dev -p 3000 2>&1 | tee dev.log
+[2026-03-22 23:32:51] Completed: Starting Next.js dev server
+[LOG] Step: Starting Next.js dev server | Duration: 0s
+==========================================
+
+==========================================
+[2026-03-22 23:32:51] Starting: Waiting for Next.js dev server
+==========================================
+Waiting for Next.js dev server to be ready on localhost:3000...
+Attempt 1/60: Next.js dev server not ready yet, waiting...
+▲ Next.js 16.1.3 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://21.0.14.87:3000
+- Environments: .env
+
+✓ Starting...
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+
+  We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
+  The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+
+  	- include was updated to add '.next/dev/types/**/*.ts'
+
+  The following mandatory changes were made to your tsconfig.json:
+
+  	- jsx was set to react-jsx (next.js uses the React automatic runtime)
+
+✓ Ready in 567ms
+Next.js dev server is ready!
+ GET / 200 in 2.0s (compile: 1904ms, render: 113ms)
+==========================================
+[2026-03-22 23:32:54] Completed: Waiting for Next.js dev server
+[LOG] Step: Waiting for Next.js dev server | Duration: 3s
+==========================================
+
+==========================================
+[2026-03-22 23:32:54] Starting: Health check
+==========================================
+[BUN] Performing health check...
+ GET / 200 in 1790ms (compile: 1624ms, render: 166ms)
+ GET / 200 in 23ms (compile: 1889µs, render: 22ms)
+[BUN] Health check passed
+==========================================
+[2026-03-22 23:32:54] Completed: Health check
+[LOG] Step: Health check | Duration: 0s
+==========================================
+
+==========================================
+[2026-03-22 23:32:54] Starting: Starting mini-services
+==========================================
+Found mini-services directory, scanning for sub-services...
+Mini-services startup completed. Started 0 service(s).
+==========================================
+[2026-03-22 23:32:54] Completed: Starting mini-services
+[LOG] Step: Starting mini-services | Duration: 0s
+==========================================
+
+Next.js dev server is running in background (PID: 756).
+Use 'kill 756' to stop it.
+✓ Compiled in 155ms
+✓ Compiled in 152ms
+✓ Compiled in 154ms
+⚠ Cross origin request detected from preview-chat-4cf4cbbc-bafd-4545-8c1c-1e0813182403.space.z.ai to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ GET / 200 in 46ms (compile: 28ms, render: 19ms)
+ GET / 200 in 16ms (compile: 3ms, render: 13ms)
+ GET / 200 in 14ms (compile: 2ms, render: 12ms)
+ GET / 200 in 14ms (compile: 2ms, render: 12ms)
+ GET / 200 in 14ms (compile: 2ms, render: 12ms)
+ GET / 200 in 16ms (compile: 3ms, render: 13ms)
+ GET / 200 in 17ms (compile: 5ms, render: 12ms)
+ GET / 200 in 13ms (compile: 1757µs, render: 12ms)
+ GET / 200 in 40ms (compile: 25ms, render: 15ms)
+ GET / 200 in 15ms (compile: 2ms, render: 12ms)
+ GET / 200 in 14ms (compile: 2ms, render: 12ms)
+ GET / 200 in 15ms (compile: 1818µs, render: 13ms)
+ GET / 200 in 15ms (compile: 2ms, render: 12ms)
+ GET / 200 in 14ms (compile: 2ms, render: 12ms)
+ GET / 200 in 18ms (compile: 2ms, render: 15ms)
+ GET / 200 in 14ms (compile: 2ms, render: 12ms)
+ GET / 200 in 14ms (compile: 1946µs, render: 12ms)
+ GET / 200 in 16ms (compile: 1641µs, render: 14ms)
+ GET / 200 in 39ms (compile: 23ms, render: 16ms)
+ GET / 200 in 17ms (compile: 1635µs, render: 15ms)
+ GET / 200 in 14ms (compile: 2ms, render: 12ms)
+ GET / 200 in 13ms (compile: 2ms, render: 11ms)
+ GET / 200 in 13ms (compile: 1664µs, render: 11ms)
+ GET / 200 in 13ms (compile: 1945µs, render: 11ms)
+ GET / 200 in 13ms (compile: 1823µs, render: 11ms)
+ GET / 200 in 17ms (compile: 2ms, render: 15ms)
+ GET / 200 in 15ms (compile: 3ms, render: 12ms)
+ GET / 200 in 13ms (compile: 1881µs, render: 11ms)
+ GET / 200 in 16ms (compile: 1811µs, render: 14ms)
+ GET / 200 in 13ms (compile: 2ms, render: 11ms)
+ GET / 200 in 43ms (compile: 23ms, render: 20ms)
+ GET / 200 in 14ms (compile: 1911µs, render: 12ms)
+ GET / 200 in 15ms (compile: 2ms, render: 13ms)
+ GET / 200 in 13ms (compile: 1934µs, render: 11ms)
+ GET / 200 in 15ms (compile: 1609µs, render: 14ms)
+ GET / 200 in 13ms (compile: 1624µs, render: 11ms)
+ GET / 200 in 14ms (compile: 2ms, render: 12ms)
+ GET / 200 in 15ms (compile: 1820µs, render: 13ms)
+ GET / 200 in 13ms (compile: 1806µs, render: 12ms)
+ GET / 200 in 14ms (compile: 1985µs, render: 12ms)
+ GET / 200 in 16ms (compile: 1933µs, render: 14ms)
+ GET / 200 in 12ms (compile: 1742µs, render: 11ms)
+ GET / 200 in 13ms (compile: 1736µs, render: 11ms)
+ GET / 200 in 16ms (compile: 2ms, render: 14ms)
+ GET / 200 in 47ms (compile: 23ms, render: 24ms)
+ GET / 200 in 12ms (compile: 1697µs, render: 10ms)
+ GET / 200 in 11ms (compile: 1530µs, render: 9ms)
+ GET / 200 in 13ms (compile: 1919µs, render: 11ms)
+ GET / 200 in 13ms (compile: 1602µs, render: 12ms)
+ GET / 200 in 11ms (compile: 1653µs, render: 10ms)
+ GET / 200 in 12ms (compile: 1523µs, render: 10ms)
+ GET / 200 in 14ms (compile: 1576µs, render: 13ms)
+ GET / 200 in 12ms (compile: 1966µs, render: 10ms)
+ GET / 200 in 13ms (compile: 1935µs, render: 11ms)
+ GET / 200 in 14ms (compile: 1710µs, render: 12ms)
+ GET / 200 in 12ms (compile: 1941µs, render: 11ms)
+ GET / 200 in 13ms (compile: 2ms, render: 11ms)
+ GET / 200 in 16ms (compile: 2ms, render: 14ms)
+ GET / 200 in 13ms (compile: 1831µs, render: 11ms)
+ GET / 200 in 13ms (compile: 2ms, render: 11ms)
+✓ Compiled in 215ms
+⚠ Fast Refresh had to perform a full reload when ./src/app/page.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET / 200 in 170ms (compile: 30ms, render: 140ms)
+⨯ ./src/lib/neuroclaw/manager.ts:19:1
+Module not found: Can't resolve './tools'
+[0m [90m 17 |[39m [36mimport[39m { [33mPermissionManager[39m[33m,[39m [33mPermissionAuditLog[39m } [36mfrom[39m [32m'./permissions/manager'[39m[33m;[39m
+ [90m 18 |[39m [36mimport[39m { [33mLLMProviderFactory[39m } [36mfrom[39m [32m'./providers/factory'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 19 |[39m [36mimport[39m { 
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m>[22m[39m[90m 20 |[39m   [33mBUILTIN_TOOLS[39m[33m,[39m 
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m>[22m[39m[90m 21 |[39m   [33mTOOL_EXECUTORS[39m[33m,[39m 
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m>[22m[39m[90m 22 |[39m   getToolById[33m,[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m>[22m[39m[90m 23 |[39m   [33mToolDefinition[39m [36mas[39m [33mImportedToolDefinition[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m>[22m[39m[90m 24 |[39m } [36mfrom[39m [32m'./tools'[39m[33m;[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 25 |[39m
+ [90m 26 |[39m [36mexport[39m [36minterface[39m [33mNeuroClawManagerOptions[39m {
+ [90m 27 |[39m   defaultLLM[33m?[39m[33m:[39m [33mLLMConfig[39m[33m;[39m[0m
+
+
+
+Import trace:
+  App Route:
+    ./src/lib/neuroclaw/manager.ts
+    ./src/app/api/neuroclaw/providers/route.ts
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/lib/neuroclaw/manager.ts:19:1
+Module not found: Can't resolve './tools'
+[0m [90m 17 |[39m [36mimport[39m { [33mPermissionManager[39m[33m,[39m [33mPermissionAuditLog[39m } [36mfrom[39m [32m'./permissions/manager'[39m[33m;[39m
+ [90m 18 |[39m [36mimport[39m { [33mLLMProviderFactory[39m } [36mfrom[39m [32m'./providers/factory'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 19 |[39m [36mimport[39m { 
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m>[22m[39m[90m 20 |[39m   [33mBUILTIN_TOOLS[39m[33m,[39m 
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m>[22m[39m[90m 21 |[39m   [33mTOOL_EXECUTORS[39m[33m,[39m 
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m>[22m[39m[90m 22 |[39m   getToolById[33m,[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m>[22m[39m[90m 23 |[39m   [33mToolDefinition[39m [36mas[39m [33mImportedToolDefinition[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m>[22m[39m[90m 24 |[39m } [36mfrom[39m [32m'./tools'[39m[33m;[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 25 |[39m
+ [90m 26 |[39m [36mexport[39m [36minterface[39m [33mNeuroClawManagerOptions[39m {
+ [90m 27 |[39m   defaultLLM[33m?[39m[33m:[39m [33mLLMConfig[39m[33m;[39m[0m
+
+
+
+Import trace:
+  App Route:
+    ./src/lib/neuroclaw/manager.ts
+    ./src/app/api/neuroclaw/tools/route.ts
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./src/app/api/neuroclaw/tools/route.ts:8:1
+Module not found: Can't resolve '@/lib/neuroclaw/tools'
+[0m [90m  6 |[39m [36mimport[39m { [33mNextRequest[39m[33m,[39m [33mNextResponse[39m } [36mfrom[39m [32m'next/server'[39m[33m;[39m
+ [90m  7 |[39m [36mimport[39m { getNeuroClaw } [36mfrom[39m [32m'@/lib/neuroclaw/manager'[39m[33m;[39m
+[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { [33mTOOL_CATEGORIES[39m[33m,[39m getToolsByCategory[33m,[39m getToolsByRiskLevel } [36mfrom[39m [32m'@/lib/neuroclaw/tools'[39m[33m;[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36masync[39m [36mfunction[39m [33mGET[39m(request[33m:[39m [33mNextRequest[39m) {
+ [90m 11 |[39m   [36mtry[39m {[0m
+
+Import map: aliased to relative './src/lib/neuroclaw/tools' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ GET /api/neuroclaw/providers?action=status 500 in 1107ms (compile: 1006ms, render: 100ms)
+ GET /api/neuroclaw/tools 500 in 1141ms (compile: 1128ms, render: 13ms)
+ GET /api/neuroclaw/providers?action=status 500 in 65ms (compile: 55ms, render: 10ms)
+ GET /api/neuroclaw/providers?action=status 500 in 16ms (compile: 8ms, render: 7ms)
+Persisting failed: Unable to write SST file 00000294.sst
+
+Caused by:
+    No such file or directory (os error 2)
+⨯ Error: ENOENT: no such file or directory, open '/home/z/my-project/.next/dev/server/app/api/neuroclaw/providers/[__metadata_id__]/route/app-paths-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/z/my-project/.next/dev/server/app/api/neuroclaw/providers/[__metadata_id__]/route/app-paths-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/home/z/my-project/.next/dev/server/app/api/neuroclaw/providers/[__metadata_id__]/route/app-paths-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/z/my-project/.next/dev/server/app/api/neuroclaw/providers/[__metadata_id__]/route/app-paths-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/home/z/my-project/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/z/my-project/.next/dev/server/pages/_app/build-manifest.json'
+}
+Persisting failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Persisting failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+⨯ Error: ENOENT: no such file or directory, open '/home/z/my-project/.next/dev/server/app/api/neuroclaw/providers/[__metadata_id__]/route/app-paths-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/z/my-project/.next/dev/server/app/api/neuroclaw/providers/[__metadata_id__]/route/app-paths-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/home/z/my-project/.next/dev/server/app/api/neuroclaw/providers/[__metadata_id__]/route/app-paths-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/z/my-project/.next/dev/server/app/api/neuroclaw/providers/[__metadata_id__]/route/app-paths-manifest.json'
+}
+Error: ENOENT: no such file or directory, open '/home/z/my-project/.next/dev/server/pages/_app/build-manifest.json'
+    at ignore-listed frames {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/z/my-project/.next/dev/server/pages/_app/build-manifest.json'
+}
+Persisting failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+error: script "dev" was terminated by signal SIGTERM (Polite quit request)
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+[?25h
