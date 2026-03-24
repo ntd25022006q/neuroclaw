@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "test": "node tests/index.js",
+    "test": "node tests/complete-test-suite.js",
+    "test:quick": "node tests/index.js",
     "demo": "node examples/demo.js"
   },
   "keywords": [

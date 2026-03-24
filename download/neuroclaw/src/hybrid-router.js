@@ -1,8 +1,10 @@
 /**
- * Hybrid LLM Router - Multi-Provider Support
+ * Hybrid LLM Router - Multi-Provider Support with Rate Limit Handling
  */
 
 import ZAI from 'z-ai-web-dev-sdk';
+
+const delay = ms => new Promise(r => setTimeout(r, ms));
 
 export class HybridRouter {
     constructor(config = {}) {
@@ -14,12 +16,15 @@ export class HybridRouter {
         this.providerStatus = new Map();
         
         this.requestTimestamps = [];
-        this.maxRequestsPerMinute = config.maxRequestsPerMinute || 60;
+        this.maxRequestsPerMinute = config.maxRequestsPerMinute || 30;
+        this.minRequestInterval = config.minRequestInterval || 2000; // 2 seconds between requests
+        this.lastRequestTime = 0;
         
         this.stats = {
             totalRequests: 0,
             successfulRequests: 0,
             failedRequests: 0,
+            retriedRequests: 0,
             totalTokens: 0
         };
 
@@ -50,14 +55,25 @@ export class HybridRouter {
         }
     }
 
-    async chat(params) {
+    async chat(params, retryCount = 0) {
         const startTime = Date.now();
+        const maxRetries = 5;
+        const baseDelay = 3000;
+        
+        // Enforce minimum interval between requests
+        const timeSinceLastRequest = Date.now() - this.lastRequestTime;
+        if (timeSinceLastRequest < this.minRequestInterval) {
+            await delay(this.minRequestInterval - timeSinceLastRequest);
+        }
         
         if (!this._checkRateLimit()) {
-            throw new Error('Rate limit exceeded');
+            const waitTime = 60000 - (Date.now() - this.requestTimestamps[0]);
+            console.log(`Rate limit reached, waiting ${Math.round(waitTime/1000)}s...`);
+            await delay(waitTime + 1000);
         }
         
         this.stats.totalRequests++;
+        this.lastRequestTime = Date.now();
         
         try {
             if (!this.zai) {
@@ -80,6 +96,7 @@ export class HybridRouter {
             if (status) {
                 status.healthy = true;
                 status.lastCheck = Date.now();
+                status.failures = 0; // Reset failures on success
             }
             
             return {
@@ -96,35 +113,61 @@ export class HybridRouter {
             };
             
         } catch (error) {
+            const errorMsg = error.message || '';
+            const isRateLimit = errorMsg.includes('429') || errorMsg.includes('rate limit') || errorMsg.includes('Too many');
+            
             this.stats.failedRequests++;
             
             const status = this.providerStatus.get('zai');
             if (status) {
                 status.failures++;
-                if (status.failures >= 3) status.healthy = false;
+                if (status.failures >= 5) status.healthy = false;
             }
             
-            // Retry once
-            try {
-                this.zai = await ZAI.create();
-                const retry = await this.zai.chat.completions.create({
-                    messages: params.messages,
-                    temperature: params.temperature ?? 0.7,
-                    max_tokens: params.maxTokens ?? 2048
-                });
+            // Exponential backoff retry for rate limits
+            if (isRateLimit && retryCount < maxRetries) {
+                const backoffDelay = baseDelay * Math.pow(2, retryCount);
+                console.log(`Rate limited, retry ${retryCount + 1}/${maxRetries} in ${backoffDelay/1000}s...`);
                 
-                this.stats.successfulRequests++;
-                return {
-                    success: true,
-                    content: retry.choices[0]?.message?.content || '',
-                    provider: 'zai',
-                    usage: retry.usage || {},
-                    latency: Date.now() - startTime,
-                    retried: true
-                };
-            } catch (retryError) {
-                throw new Error(`API call failed: ${error.message}`);
+                await delay(backoffDelay);
+                this.stats.retriedRequests++;
+                
+                try {
+                    this.zai = await ZAI.create();
+                    const retry = await this.zai.chat.completions.create({
+                        messages: params.messages,
+                        temperature: params.temperature ?? 0.7,
+                        max_tokens: params.maxTokens ?? 2048
+                    });
+                    
+                    this.stats.successfulRequests++;
+                    return {
+                        success: true,
+                        content: retry.choices[0]?.message?.content || '',
+                        provider: 'zai',
+                        usage: retry.usage || {},
+                        latency: Date.now() - startTime,
+                        retried: true,
+                        retryCount: retryCount + 1
+                    };
+                } catch (retryError) {
+                    // Recursive retry with exponential backoff
+                    return this.chat(params, retryCount + 1);
+                }
             }
+            
+            // Final failure
+            if (retryCount >= maxRetries) {
+                console.log(`Max retries (${maxRetries}) exceeded`);
+            }
+            
+            return {
+                success: false,
+                content: '',
+                error: error.message,
+                provider: 'zai',
+                latency: Date.now() - startTime
+            };
         }
     }
 

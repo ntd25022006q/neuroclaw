@@ -61,8 +61,21 @@ export class NeuroClaw {
             this.stats.apiCalls++;
             this.stats.tokensUsed += response.usage?.total_tokens || 0;
             
+            // Handle failed responses
+            if (!response.success) {
+                return {
+                    success: false,
+                    content: response.error || 'Request failed',
+                    error: response.error,
+                    metadata: {
+                        provider: response.provider,
+                        processingTime: Date.now() - startTime
+                    }
+                };
+            }
+            
             let finalContent = response.content;
-            if (options.reflect !== false) {
+            if (options.reflect !== false && response.content) {
                 const reflection = await this.reflection.reflect({
                     input: message,
                     output: response.content,
@@ -90,7 +103,7 @@ export class NeuroClaw {
             
         } catch (error) {
             this.stats.errors++;
-            return { success: false, error: error.message };
+            return { success: false, content: error.message, error: error.message };
         }
     }
 
