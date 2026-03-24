@@ -1,0 +1,186 @@
+/**
+ * Hybrid LLM Router - Multi-Provider Support
+ */
+
+import ZAI from 'z-ai-web-dev-sdk';
+
+export class HybridRouter {
+    constructor(config = {}) {
+        this.config = config;
+        this.zai = null;
+        this.initialized = false;
+        
+        this.providers = new Map();
+        this.providerStatus = new Map();
+        
+        this.requestTimestamps = [];
+        this.maxRequestsPerMinute = config.maxRequestsPerMinute || 60;
+        
+        this.stats = {
+            totalRequests: 0,
+            successfulRequests: 0,
+            failedRequests: 0,
+            totalTokens: 0
+        };
+
+        this._init();
+    }
+
+    async _init() {
+        try {
+            this.zai = await ZAI.create();
+            this.initialized = true;
+            
+            this.providers.set('zai', {
+                name: 'ZAI SDK',
+                available: true,
+                priority: 1
+            });
+            
+            this.providerStatus.set('zai', {
+                healthy: true,
+                lastCheck: Date.now(),
+                failures: 0
+            });
+            
+            console.log('🔀 Hybrid Router initialized');
+        } catch (error) {
+            console.error('Router initialization failed:', error.message);
+            throw error;
+        }
+    }
+
+    async chat(params) {
+        const startTime = Date.now();
+        
+        if (!this._checkRateLimit()) {
+            throw new Error('Rate limit exceeded');
+        }
+        
+        this.stats.totalRequests++;
+        
+        try {
+            if (!this.zai) {
+                this.zai = await ZAI.create();
+            }
+            
+            const response = await this.zai.chat.completions.create({
+                messages: params.messages,
+                temperature: params.temperature ?? 0.7,
+                max_tokens: params.maxTokens ?? 2048
+            });
+            
+            const latency = Date.now() - startTime;
+            const usage = response.usage || {};
+            
+            this.stats.successfulRequests++;
+            this.stats.totalTokens += usage.total_tokens || 0;
+            
+            const status = this.providerStatus.get('zai');
+            if (status) {
+                status.healthy = true;
+                status.lastCheck = Date.now();
+            }
+            
+            return {
+                success: true,
+                content: response.choices[0]?.message?.content || '',
+                provider: 'zai',
+                model: response.model || 'default',
+                usage: {
+                    prompt_tokens: usage.prompt_tokens || 0,
+                    completion_tokens: usage.completion_tokens || 0,
+                    total_tokens: usage.total_tokens || 0
+                },
+                latency
+            };
+            
+        } catch (error) {
+            this.stats.failedRequests++;
+            
+            const status = this.providerStatus.get('zai');
+            if (status) {
+                status.failures++;
+                if (status.failures >= 3) status.healthy = false;
+            }
+            
+            // Retry once
+            try {
+                this.zai = await ZAI.create();
+                const retry = await this.zai.chat.completions.create({
+                    messages: params.messages,
+                    temperature: params.temperature ?? 0.7,
+                    max_tokens: params.maxTokens ?? 2048
+                });
+                
+                this.stats.successfulRequests++;
+                return {
+                    success: true,
+                    content: retry.choices[0]?.message?.content || '',
+                    provider: 'zai',
+                    usage: retry.usage || {},
+                    latency: Date.now() - startTime,
+                    retried: true
+                };
+            } catch (retryError) {
+                throw new Error(`API call failed: ${error.message}`);
+            }
+        }
+    }
+
+    async streamChat(params, onChunk) {
+        const response = await this.chat(params);
+        if (onChunk && response.content) {
+            const words = response.content.split(' ');
+            for (const word of words) {
+                await new Promise(r => setTimeout(r, 30));
+                onChunk(word + ' ');
+            }
+        }
+        return response;
+    }
+
+    _checkRateLimit() {
+        const now = Date.now();
+        this.requestTimestamps = this.requestTimestamps.filter(t => t > now - 60000);
+        if (this.requestTimestamps.length >= this.maxRequestsPerMinute) return false;
+        this.requestTimestamps.push(now);
+        return true;
+    }
+
+    getAvailableProviders() {
+        return Array.from(this.providers.entries())
+            .filter(([key]) => this.providerStatus.get(key)?.healthy)
+            .map(([key, provider]) => ({ key, name: provider.name, priority: provider.priority }))
+            .sort((a, b) => a.priority - b.priority);
+    }
+
+    async checkHealth() {
+        const health = {};
+        for (const [key] of this.providers) {
+            try {
+                const start = Date.now();
+                await this.zai.chat.completions.create({
+                    messages: [{ role: 'user', content: 'ping' }],
+                    max_tokens: 5
+                });
+                health[key] = { healthy: true, latency: Date.now() - start };
+                this.providerStatus.get(key).healthy = true;
+            } catch (error) {
+                health[key] = { healthy: false, error: error.message };
+                this.providerStatus.get(key).healthy = false;
+            }
+        }
+        return health;
+    }
+
+    getStats() {
+        return { ...this.stats, providerStatus: Object.fromEntries(this.providerStatus) };
+    }
+
+    resetStats() {
+        this.stats = { totalRequests: 0, successfulRequests: 0, failedRequests: 0, totalTokens: 0 };
+    }
+}
+
+export default HybridRouter;
